@@ -23,9 +23,9 @@ mongoose.connection.once("open", () => {
 });
 
 app.use(express.json());
-app.get("/", (req, res) => {
-  res.send("Hello Worldddd!");
-});
+// app.get("/", (req, res) => {
+//   res.send("Hello Worldddd!");
+// });
 
 app.use(express.static(__dirname + "/client/build/"));
 
