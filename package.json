@@ -2,7 +2,7 @@
   "name": "tea-tree-reinvented",
   "version": "1.0.0",
   "engines": {
-    "node": "10.3.0"
+    "node": "12.2.0"
   },
   "description": "",
   "main": "server.js",
