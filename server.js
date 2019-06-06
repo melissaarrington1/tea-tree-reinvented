@@ -1,4 +1,6 @@
-if (process.env.NODE_ENV !== "production") require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config();
+}
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
@@ -7,25 +9,15 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
 });
 
-if (process.env.MONGODB_URI) {
-  mongoose.connect(process.env.MONGODB_URI);
-} else {
-  mongoose.connect("mongodb://localhost/tea-tree");
-}
-
-mongoose.connection.on("error", err => {
-  console.error("MongoDB connection error: ", err);
-  process.exit(-1);
+const db = mongoose.connection;
+db.on("error", error => {
+  console.log(error);
 });
-
-mongoose.connection.once("open", () => {
-  console.log("Mongoose has connected to MongoDB");
+db.once("open", () => {
+  console.log("Connected to Mongoose");
 });
 
 app.use(express.json());
-// app.get("/", (req, res) => {
-//   res.send("Hello Worldddd!");
-// });
 
 app.use(express.static(__dirname + "/client/build/"));
 
