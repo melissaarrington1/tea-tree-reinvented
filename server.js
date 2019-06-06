@@ -3,6 +3,10 @@ const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
 
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true
+});
+
 if (process.env.MONGODB_URI) {
   mongoose.connect(process.env.MONGODB_URI);
 } else {
@@ -16,10 +20,6 @@ mongoose.connection.on("error", err => {
 
 mongoose.connection.once("open", () => {
   console.log("Mongoose has connected to MongoDB");
-});
-
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true
 });
 
 app.use(express.json());
