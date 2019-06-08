@@ -4,6 +4,7 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const userController = require("./controllers/userController");
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
@@ -24,6 +25,8 @@ app.use(express.static(__dirname + "/client/build/"));
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/client/build/index.html");
 });
+
+app.use("/api/users", userController);
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {
