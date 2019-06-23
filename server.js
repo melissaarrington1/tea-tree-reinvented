@@ -2,9 +2,14 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
 const express = require("express");
-const app = express();
 const mongoose = require("mongoose");
-const userController = require("./controllers/userController");
+const bodyParser = require("body-parser");
+const userController = require("./routes/users");
+
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true
