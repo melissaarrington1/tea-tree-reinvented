@@ -11,7 +11,7 @@ const User = require("../models/User");
 
 router.get("/test", (req, res) => res.json({ msg: "Users works" }));
 
-router.get("/", (req, res) => {
+router.get("/list", (req, res) => {
   User.find().then(users => res.json(users));
 });
 
@@ -25,9 +25,17 @@ router.post("/register", (req, res) => {
     email: req.body.email,
     password: req.body.password
   });
-  newUser
-    .save()
-    .then(user => res.json(user))
+  newUser.save().then(user => res.json(user));
+  // .catch(err => res.status(404).json({ success: false }));
+});
+
+// @route DELETE api/items/:id
+// @desc Delete An Item
+// @access Public
+
+router.delete("/:id", (req, res) => {
+  User.findById(req.params.id)
+    .then(user => user.remove().then(() => res.json({ success: true })))
     .catch(err => res.status(404).json({ success: false }));
 });
 
