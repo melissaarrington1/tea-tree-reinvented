@@ -8,6 +8,7 @@ router.get("/", (req, res) => {
       res.json(users);
     })
     .catch(err => console.log(err));
+  console.log("all user found");
 });
 
 module.exports = router;

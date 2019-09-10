@@ -1,21 +1,19 @@
 const express = require("express");
 const router = express.Router();
-// const gravatar = require("gravatar");
-// const bcrypt = require("bcrypt");
 
 const User = require("../models/User");
+
+router.get("/test", (req, res) => res.json({ msg: "Users is working" }));
 
 // @route GET api/users/test
 // @desc Tests users route
 // @access Public
 
-router.get("/test", (req, res) => res.json({ msg: "Users works" }));
-
 router.get("/list", (req, res) => {
   User.find().then(users => res.json(users));
 });
 
-// @route GET api/users/register
+// @route POST api/users/register
 // @desc Register user
 // @access Public
 
